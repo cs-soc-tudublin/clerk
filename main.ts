@@ -1,7 +1,8 @@
 import {  Editor, MarkdownView, Plugin } from 'obsidian';
 import { blogModal } from 'src/blogModal';
 import { docsModal } from 'src/docsModal';
-import { createBlogFrontMatter, createDocsFrontmatter } from 'src/createFrontMatter';
+import { createBlogFrontMatter, createDocsFrontMatter, createMinutesFrontMatter } from 'src/createFrontMatter';
+import { minutesModal } from 'src/minutesModal';
 
 interface PluginSettings {
 	mySetting: string;
@@ -32,7 +33,17 @@ export default class Clerk extends Plugin {
 			name: 'Create a docs page',
 			editorCallback: (editor: Editor, view: MarkdownView) => {
 				new docsModal(this.app, (result) => {
-					editor.replaceSelection(createDocsFrontmatter(result.title, result.tags));
+					editor.replaceSelection(createDocsFrontMatter(result.title, result.tags));
+				}).open();
+			}
+		});
+
+		this.addCommand({
+			id: 'open-meetings-modal',
+			name: 'Create meeting minutes',
+			editorCallback: (editor: Editor, view: MarkdownView) => {
+				new minutesModal(this.app, (result) => {
+					editor.replaceSelection(createMinutesFrontMatter(result.title, result.attending, result.chair, result.meetingGroup, result.meetingAuthor));
 				}).open();
 			}
 		});
