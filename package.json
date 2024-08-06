@@ -1,6 +1,6 @@
 {
 	"name": "clerk",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "This plugin makes it easier to start writing Blog Posts and Docs for CS++.",
 	"main": "main.js",
 	"scripts": {
